@@ -38,14 +38,21 @@ pipeline{
                             }
                         }
                     }
-         stage('Package'){
+        stage('Package'){
                         agent any
                         steps{
                             sh 'mvn package'
                         }
                     }
-
-
-            }
+        }
+        stage{
+            agent { dockerfile true }
+                stage('Container') {
+                    steps {
+                        sh 'node --version'
+                        sh 'svn --version'
+                    }
+                }
+        }
     }
 }
