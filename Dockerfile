@@ -1,5 +1,4 @@
 FROM openjdk:8-jdk-alpine
-ARG JAR_FILE=/var/lib/jenkins/workspace/mycertProj@2/target/*.jar
-COPY $JAR_FILE /app.jar
+COPY /var/lib/jenkins/workspace/mycertProj@2/target/calculateTax-0.0.1-SNAPSHOT.jar /app.jar
 EXPOSE 8081
 ENTRYPOINT ["java","-jar","/app.jar"]
