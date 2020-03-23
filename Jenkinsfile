@@ -44,15 +44,16 @@ pipeline{
                  }
               }
         }
-        stage{
+
+
+        stage('Container') {
             agent { Dockerfile true }
-                stage('Container') {
-                    steps {
-                        sh 'node --version'
-                        sh 'svn --version'
-                    }
-                }
+            steps {
+                sh 'sudo docker build -t myimage:$BUILD_NUMBER .'
+                sh 'sudo docker run -itd -P myimage:$BUILD_NUMBER'
+            }
         }
+
 
     }
 }
