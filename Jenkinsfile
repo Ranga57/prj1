@@ -49,7 +49,7 @@ pipeline{
         stage('Container') {
             agent { dockerfile true }
             steps {
-                sh 'sudo docker build -t myimage:$BUILD_NUMBER .'
+                sh 'sudo docker build -t CalculateTaxApplication:$BUILD_NUMBER .'
                 sh 'sudo docker run -itd -P myimage:$BUILD_NUMBER'
             }
         }
