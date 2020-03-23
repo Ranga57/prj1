@@ -36,6 +36,7 @@ pipeline{
                    always{
                       cobertura coberturaReportFile: 'target/site/cobertura/coverage.xml'
                     }
+                 }
         }
         stage('Package'){
               agent any
@@ -47,7 +48,7 @@ pipeline{
 
 
         stage('Container') {
-            agent { Dockerfile true }
+            agent { dockerfile true }
             steps {
                 sh 'sudo docker build -t myimage:$BUILD_NUMBER .'
                 sh 'sudo docker run -itd -P myimage:$BUILD_NUMBER'
