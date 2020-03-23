@@ -50,7 +50,7 @@ pipeline{
             agent { dockerfile true }
             steps {
                 sh 'sudo docker build -t --privileged=true CalculateTaxApplication:$BUILD_NUMBER .'
-                sh 'sudo docker run -itd -P CalculateTaxApplication:$BUILD_NUMBER'
+                sh 'sudo docker run -itd -P CalculateTaxApplication:$BUILD_NUMBER `--entrypoint=''`.'
             }
         }
 
