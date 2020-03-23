@@ -36,6 +36,7 @@ pipeline{
                    always{
                       cobertura coberturaReportFile: 'target/site/cobertura/coverage.xml'
                     }
+        }
         stage('Package'){
               agent any
                  steps{
@@ -44,7 +45,7 @@ pipeline{
               }
         }
         stage{
-            agent { dockerfile true }
+            agent { Dockerfile true }
                 stage('Container') {
                     steps {
                         sh 'node --version'
