@@ -7,15 +7,15 @@ pipeline{
             }
         }
         stage('CodeReview'){
-                        agent any
-                        steps{
-                            sh 'mvn pmd:pmd'
-                        }
-                        post{
-                            always{
-                                pmd pattern: 'target/pmd.xml'
-                            }
-                        }
+             steps{
+                 sh 'mvn pmd:pmd'
+             }
+             post{
+                  always{
+                     pmd pattern: 'target/pmd.xml'
+                  }
+             }
+        }
 
         stage('Test'){
             steps{
@@ -28,24 +28,23 @@ pipeline{
             }
         }
         stage('MetriCheck'){
-                        agent any
-                        steps{
-                            sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
-                        }
-                        post{
-                            always{
-                                cobertura coberturaReportFile: 'target/site/cobertura/coverage.xml'
-                            }
-                        }
+             agent any
+                 steps{
+                    sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+                 }
+                 post{
+                   always{
+                      cobertura coberturaReportFile: 'target/site/cobertura/coverage.xml'
                     }
+                 }
+         }
          stage('Package'){
-                        agent any
-                        steps{
-                            sh 'mvn package'
-                        }
-                    }
+              agent any
+                 steps{
+                    sh 'mvn package'
+                 }
+         }
 
 
-            }
     }
 }
