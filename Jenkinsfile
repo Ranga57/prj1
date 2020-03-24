@@ -51,8 +51,8 @@ pipeline{
                 sh 'mkdir docker-file'
                 sh 'cd docker-file'
                 sh 'cp /var/lib/jenkins/workspace/mycertProj@2/target/*.jar  .'
-                sh 'sudo docker build -t --privileged=true CalculateTaxApplication:$BUILD_NUMBER /var/lib/jenkins/workspace/mycertProj@2/.'
-                sh 'sudo docker run -itd -P CalculateTaxApplication:$BUILD_NUMBER'
+                sh 'sudo docker build -t CalculateTaxApplication:$BUILD_NUMBER /var/lib/jenkins/workspace/mycertProj@2/.'
+                sh 'sudo docker run -itd -p 8081:8081 CalculateTaxApplication:$BUILD_NUMBER'
             }
         }
 
