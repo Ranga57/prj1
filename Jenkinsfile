@@ -48,6 +48,7 @@ pipeline{
 
         stage('Container') {
             steps {
+                sh 'rm -rf docker-file'
                 sh 'mkdir docker-file'
                 sh 'cd docker-file'
                 sh 'cp /var/lib/jenkins/workspace/mycertProj@2/target/*.jar  .'
