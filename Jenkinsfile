@@ -60,7 +60,7 @@ pipeline{
         stage('ansible_deploy'){
             agent{label 'ansible_controller'}
             steps{
-                playbook: deploy.yml
+                 deploy.yml
             }
         }
 
