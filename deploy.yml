@@ -1,14 +1,13 @@
 ---
--hosts: webservers
- become: true
- become_user: root
- tasks:
-  -iname: install docker
-    yum: name=docker state=present
-  -sname: start docker
-    service: name=docker state=started
-  -bname: build dockerfile
-    command: chdir=/tmp/gitrepo docker build -t taxapp:$buildnumber
-  -rname: run docker image
-    command: docker run -itd -p 8081:8081 taxapp:$buildNumber
-
+- hosts: webservers
+  become: true
+  become_user: root
+  tasks:
+    - name: Install docker
+      yum: name=docker state=present
+    - name: Start docker
+      service: name=docker state=started
+    - name: build dockerfile
+      command: chdir=/tmp/gitrepo docker build -t taxapp:v1
+    - name: run docker image
+      command: docker run -itd -p 8081:8081 taxapp:v1
